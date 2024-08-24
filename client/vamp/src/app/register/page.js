@@ -37,7 +37,7 @@ const GlowingDivider = () => {
   );
 };
 
-const Login = () => {
+const Register = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -86,10 +86,10 @@ const Login = () => {
         <div className="relative mx-auto w-full max-w-md border border-neutral-700 bg-neutral-900 p-8 shadow-input md:rounded-xl">
           <BottomGradient />
           <h3 className="relative z-10 bg-gradient-to-b from-neutral-200 to-neutral-600 bg-clip-text text-center font-sans text-lg  font-bold text-transparent md:text-3xl">
-            Welcome Back
+            Welcome to VAMP
           </h3>
           <p className="mt-2 text-center text-sm text-neutral-600 dark:text-neutral-300">
-            Please login to continue.
+            Start Dsonating !!!
           </p>
 
           <form className="my-8" onSubmit={handleLogin}>
@@ -116,7 +116,7 @@ const Login = () => {
                 required
               />
               <div
-                className="absolute right-2 top-1/2 -translate-y-1/2 transform cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 transform cursor-pointer"
                 onClick={togglePasswordVisibility}
               >
                 {showPassword ? (
@@ -144,12 +144,13 @@ const Login = () => {
            
           </form>
 
+
           <GlowingDivider />
 
           <div className="flex items-center justify-center">
             <span className="text-neutral-400">Don't have an account?</span>
-            <Link href="/register" className="ml-2 text-[#F1670B]">
-              Create Account
+            <Link href="/login" className="ml-2 text-[#F1670B]">
+              Already have an account
             </Link>
           </div>
         </div>
@@ -159,4 +160,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
