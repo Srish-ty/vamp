@@ -32,12 +32,25 @@ export const fetchRequirements = async () => {
   try {
     const reqCol = collection(db, "requirements");
     const reqSnapshot = await getDocs(reqCol);
-    const reqList = reqSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    return reqList;
+
+    const reqWithHospitals = await Promise.all(
+      reqSnapshot.docs.map(async (reqDoc) => {
+        const reqData = reqDoc.data();
+
+        // Fetch hospital details using the reference
+        const hospitalRef = reqData.hospital;
+        const hospitalDoc = await getDoc(hospitalRef);
+
+        return {
+          id: reqDoc.id,
+          ...reqData,
+          hospitalDetails: hospitalDoc.exists() ? hospitalDoc.data() : null,
+        };
+      })
+    );
+
+    return reqWithHospitals;
   } catch (error) {
-    console.error("Error fetching requirements: ", error);
+    console.error("Error fetching requirements and hospital details: ", error);
   }
 };
