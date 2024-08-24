@@ -1,6 +1,26 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth, db } from "./config";
 import { addDoc, collection, GeoPoint } from "firebase/firestore";
+
+const googleProvider = new GoogleAuthProvider();
+
+export const loginWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+
+    const user = result.user;
+    return { success: true, user };
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    return { success: false, error: errorMessage };
+  }
+};
 
 export const loginUser = async (email, password) => {
   const auth = getAuth();

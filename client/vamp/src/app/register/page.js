@@ -4,7 +4,7 @@ import RegisterHospital from "./hospReg";
 import LabRegistrationForm from "./labReg";
 
 const page = () => {
-  return <RegisterHospital />;
+  return <UserForm />;
 };
 
 export default page;
