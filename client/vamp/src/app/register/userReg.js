@@ -24,7 +24,7 @@ const LabelInputContainer = ({ children, className }) => {
   );
 };
 
-const RegisterForm = () => {
+const UserForm = () => {
   const [userData, setUserData] = useState({
     bloodGroup: "",
     email: "",
@@ -183,4 +183,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default UserForm;

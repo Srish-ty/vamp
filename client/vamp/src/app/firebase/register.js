@@ -2,6 +2,26 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./config";
 import { addDoc, collection, GeoPoint } from "firebase/firestore";
 
+export const loginUser = async (email, password) => {
+  const auth = getAuth();
+
+  try {
+    // Create a new user with email and password
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+
+    // You can return user data or success message
+    return { success: true, user };
+  } catch (error) {
+    // Handle errors such as invalid email, weak password, etc.
+    return { success: false, error: error.message };
+  }
+};
+
 export const registerUser = async (userData) => {
   try {
     const usersRef = collection(db, "users");

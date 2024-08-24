@@ -60,6 +60,7 @@ const RegisterHospital = () => {
 
     try {
       await addHospitalToFirestore(finalData);
+      alert("Registration successful!");
       router.push("/feed"); // Redirect on successful registration
     } catch (error) {
       console.error(error);
@@ -166,7 +167,12 @@ const RegisterHospital = () => {
             Allow Location Access
           </button>
         </div>
-
+        {hospitalData.location && (
+          <span className="mt-2 text-teal-700">
+            Location: {hospitalData.location.latitude}°,
+            {hospitalData.location.longitude}°
+          </span>
+        )}
         <button
           type="submit"
           className="w-full bg-teal-600 text-white p-3 rounded"

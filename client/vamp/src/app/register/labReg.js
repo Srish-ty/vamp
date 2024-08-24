@@ -6,7 +6,8 @@ import { registerLab } from "../firebase/register";
 import { GeoPoint } from "firebase/firestore";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
-import { BackgroundBeams } from "../components/ui/background-beams"; // Adjust the import path accordingly
+import { cn } from "../lib/utils";
+import { BackgroundBeams } from "../components/ui/background-beams";
 
 const BottomGradient = () => {
   return (
@@ -19,18 +20,8 @@ const BottomGradient = () => {
 
 const LabelInputContainer = ({ children, className }) => {
   return (
-    <div className={`flex w-full flex-col space-y-2 ${className}`}>
+    <div className={cn("flex w-full flex-col space-y-2", className)}>
       {children}
-    </div>
-  );
-};
-
-const GlowingDivider = () => {
-  return (
-    <div className="relative my-6">
-      <div className="flex items-center justify-center">
-        <div className="relative w-full border-t-2 border-gray-400"></div>
-      </div>
     </div>
   );
 };
