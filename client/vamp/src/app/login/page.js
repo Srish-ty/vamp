@@ -7,6 +7,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { BackgroundBeams } from "../components/ui/background-beams";
+import Types from "./types";
 
 const BottomGradient = () => {
   return (
@@ -26,6 +27,8 @@ const LabelInputContainer = ({ children, className }) => {
 };
 
 const RegisterForm = () => {
+  const [stype, setStype] = useState("");
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
@@ -79,15 +82,15 @@ const RegisterForm = () => {
           <h3 className="relative z-10 bg-gradient-to-b from-neutral-700 to-neutral-900 bg-clip-text text-center font-sans text-lg font-bold text-transparent md:text-3xl">
             Create Your Account or Login
           </h3>
+          Join as:
+          <Types selected={stype} onClick={setStype} />
           <p className="mt-2 text-center text-sm text-neutral-600 dark:text-neutral-300">
             Fill in your details.
           </p>
-
           {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
           {successMessage && (
             <p className="text-green-500 mb-4 text-center">{successMessage}</p>
           )}
-
           <form className="my-8" onSubmit={handleSubmit}>
             <LabelInputContainer className="my-4">
               <Label htmlFor="email">Email</Label>
@@ -124,7 +127,6 @@ const RegisterForm = () => {
               <BottomGradient />
             </button>
           </form>
-
           {/* Google Sign-In Button */}
           <div className="mt-4">
             <button
