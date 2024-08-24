@@ -11,13 +11,11 @@ const Feed = () => {
       const postData = await fetchPosts();
       const reqData = await fetchRequirements();
 
-      // Add a 'type' field to differentiate between posts and requirements
       const combined = [
         ...postData.map((post) => ({ ...post, type: "Post" })),
         ...reqData.map((req) => ({ ...req, type: "Requirement" })),
       ];
 
-      // Sort by date (most recent first)
       combined.sort((a, b) => {
         const dateA = a.date || a.postDate;
         const dateB = b.date || b.postDate;
@@ -31,70 +29,90 @@ const Feed = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Feed</h1>
+      <h1 className="text-4xl font-extrabold text-teal-600 mb-8 text-center">
+        Community Feed
+      </h1>
       {combinedData.map((item) => (
         <div
           key={item.id}
-          className="border rounded-lg p-4 mb-4 bg-white shadow-md"
+          className="border border-teal-300 rounded-lg p-6 mb-6 bg-white shadow-lg transition duration-300 ease-in-out hover:shadow-xl hover:scale-105 flex flex-col items-center "
         >
-          <h2 className="text-xl font-semibold text-gray-800">
+          <h2 className="text-2xl font-semibold text-turquoise-700 mb-2">
             {item.title || "Blood Requirement"}
           </h2>
-          <p className="text-sm text-gray-500 mb-2">
-            Type: <span className="font-bold">{item.type}</span>
+          <p className="text-md text-teal-500 mb-4">
+            Type:{" "}
+            <span className="font-bold text-turquoise-600">{item.type}</span>
           </p>
 
-          {/* If it's a post */}
           {item.type === "Post" && (
-            <>
-              <h3 className="text-md font-medium text-gray-700">
-                Author: {item.authorDetails?.name || "Unknown"}
+            <div className="w-[100%]">
+              <h3 className="text-lg font-medium text-gray-700 mb-2 flex flex-col items-start">
+                Laboratory:{" "}
+                <span className="text-turquoise-700">
+                  {item.authorDetails?.name || "Unknown"}
+                </span>
               </h3>
               {item.content.map((para, index) => (
-                <p key={index} className="text-gray-700 mb-2">
+                <p key={index} className="text-gray-600 mb-4">
                   {para}
                 </p>
               ))}
-            </>
+            </div>
           )}
 
-          {/* If it's a requirement */}
           {item.type === "Requirement" && (
             <>
-              <h3 className="text-md font-medium text-gray-700">
-                Hospital: {item.hospitalDetails?.name || "Unknown"}
+              <h3 className="text-lg font-medium text-gray-700 mb-2">
+                Hospital:{" "}
+                <span className="text-turquoise-700">
+                  {item.hospitalDetails?.name || "Unknown"}
+                </span>
               </h3>
               {bloodgroups.map(
                 (grp) =>
                   item.demand[grp] && (
-                    <p key={grp} className="text-gray-700 mb-2">
-                      {grp}: {item.demand[grp]}
+                    <p key={grp} className="text-gray-600 mb-2">
+                      <span className="text-teal-700 font-semibold">
+                        {grp}:
+                      </span>{" "}
+                      {item.demand[grp]}
                     </p>
                   )
               )}
             </>
           )}
 
-          <small className="text-gray-500">
+          <div className="mt-4 text-sm text-gray-500">
             {item.type === "Post" ? (
               <span>
-                Posted on:
-                {new Date(item.date.seconds * 1000).toLocaleDateString()}
+                Posted on:{" "}
+                <span className="text-teal-600">
+                  {new Date(item.date.seconds * 1000).toLocaleDateString()}
+                </span>
               </span>
             ) : (
               <>
                 <span>
-                  Posted on:
-                  {new Date(item.postDate.seconds * 1000).toLocaleDateString()}
+                  Posted on:{" "}
+                  <span className="text-teal-600">
+                    {new Date(
+                      item.postDate.seconds * 1000
+                    ).toLocaleDateString()}
+                  </span>
                 </span>
                 <br />
                 <span>
-                  Last Date:
-                  {new Date(item.lastDate.seconds * 1000).toLocaleDateString()}
+                  Last Date:{" "}
+                  <span className="text-teal-600">
+                    {new Date(
+                      item.lastDate.seconds * 1000
+                    ).toLocaleDateString()}
+                  </span>
                 </span>
               </>
             )}
-          </small>
+          </div>
         </div>
       ))}
     </div>
