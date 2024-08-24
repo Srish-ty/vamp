@@ -111,10 +111,10 @@ export const BackgroundBeams = React.memo(({ className }) => {
                 delay: Math.random() * 10,
               }}
             >
-              <stop stopColor="#18CCFC" stopOpacity="0"></stop>
-              <stop stopColor="#18CCFC"></stop>
-              <stop offset="32.5%" stopColor="#6344F5"></stop>
-              <stop offset="100%" stopColor="#AE48FF" stopOpacity="0"></stop>
+              <stop stopColor="#abedff" stopOpacity="0"></stop>
+              <stop stopColor="#abedff"></stop>
+              <stop offset="32.5%" stopColor="#f5fafa"></stop>
+              <stop offset="100%" stopColor="#f5fafa" stopOpacity="0"></stop>
             </motion.linearGradient>
           ))}
 
@@ -137,3 +137,30 @@ export const BackgroundBeams = React.memo(({ className }) => {
 });
 
 BackgroundBeams.displayName = "BackgroundBeams";
+
+export const LabRegistrationForm = () => {
+  return (
+    <>
+      <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+      <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+    </>
+  );
+};
+
+export const LabelInputContainer = ({ children, className }) => {
+  return (
+    <div className={`flex w-full flex-col space-y-2 ${className}`}>
+      {children}
+    </div>
+  );
+};
+
+export const GlowingDivider = () => {
+  return (
+    <div className="relative my-6">
+      <div className="flex items-center justify-center">
+        <div className="relative w-full border-t-2 border-gray-400"></div>
+      </div>
+    </div>
+  );
+};
