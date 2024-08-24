@@ -60,7 +60,7 @@ const RegisterHospital = () => {
 
     try {
       await addHospitalToFirestore(finalData);
-      router.push("/success"); // Redirect on successful registration
+      router.push("/feed"); // Redirect on successful registration
     } catch (error) {
       console.error(error);
       alert("Error registering hospital");

@@ -2,24 +2,20 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./config";
 import { addDoc, collection, GeoPoint } from "firebase/firestore";
 
-export const registerUser = async (email, password) => {
+export const registerUser = async (userData) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    // Registered user data
-    return {
-      success: true,
-      user: userCredential.user,
-    };
+    const usersRef = collection(db, "users");
+    await addDoc(usersRef, {
+      ...userData,
+      location: new GeoPoint(
+        userData.location.latitude, // Ensure these are set
+        userData.location.longitude
+      ),
+    });
+    console.log("User registered successfully!");
   } catch (error) {
-    console.error("Error registering user: ", error.message);
-    return {
-      success: false,
-      error: error.message,
-    };
+    console.error("Error registering user: ", error);
+    throw new Error("Error registering user");
   }
 };
 
