@@ -2,8 +2,7 @@
 
 import { Avatar, Menu, MenuItem, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { auth } from "../firebase/config";
 
@@ -24,6 +23,7 @@ const UserMenu = () => {
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
+
   return (
     <div>
       <Box
@@ -38,7 +38,7 @@ const UserMenu = () => {
           src={
             "https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png"
           }
-          sx={{ width: 24, height: 24, marginLeft: "5px" }}
+          sx={{ width: 40, height: 40, marginLeft: "5px" }} // Increase size here
         />
       </Box>
       <Menu
@@ -46,14 +46,26 @@ const UserMenu = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        sx={{
+          "& .MuiPaper-root": {
+            width: "200px", // Increase width
+            height: "auto", // Adjust height if needed
+            padding: "10px", // Add padding inside the menu
+          },
+        }}
       >
-        <MenuItem>
-          {" "}
-          <a href="/dashboard">Profile</a>
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>
-          {" "}
-          <a href="/login">Logout</a>{" "}
+        <MenuItem sx={{ padding: "10px 20px" }}>
+          <a
+            href="/dashboard"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            Profile
+          </a>
+        </MenuItem>{" "}
+        <MenuItem onClick={handleLogout} sx={{ padding: "10px 20px" }}>
+          <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
+            Logout{" "}
+          </a>
         </MenuItem>
       </Menu>
     </div>

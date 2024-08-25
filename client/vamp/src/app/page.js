@@ -44,10 +44,16 @@ export default function Home() {
         </h1>
         <div className="flex ">
           <h2 className="w-4/5 flex items-center text-2xl font-bold font-sans px-6 ml-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-            praesentium! Assumenda, temporibus ea quisquam id, at voluptatum
-            sint expedita voluptas praesentium, culpa eius ullam ipsam atque
-            quae pariatur voluptatibus aliquam provident blanditiis.
+            The platform addresses the critical issue of blood shortages by
+            creating a seamless connection between blood donors and those in
+            need. It simplifies the donation process, making it more accessible
+            and efficient. The platform also leverages predictive analytics to
+            anticipate blood demand, ensuring timely donations and reducing
+            shortages. Additionally, it fosters community engagement by
+            encouraging users to participate in blood donation drives and share
+            the cause, thus broadening the donor base and increasing overall
+            donations. This comprehensive approach not only saves lives but also
+            improves the efficiency of blood collection and distribution.
           </h2>
           <GlobeDemo />
         </div>

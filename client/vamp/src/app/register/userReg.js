@@ -39,7 +39,7 @@ const UserForm = () => {
     phone: "",
     type: type || "User",
     uid: user.uid,
-    karma: 2,
+    karma: 5,
     activity: [
       new Date("2024-08-15T00:00:00"),
       new Date("2024-08-23T00:00:00"),
