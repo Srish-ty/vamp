@@ -26,7 +26,6 @@ export const loginUser = async (email, password) => {
   const auth = getAuth();
 
   try {
-    // Create a new user with email and password
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -34,7 +33,6 @@ export const loginUser = async (email, password) => {
     );
     const user = userCredential.user;
 
-    // You can return user data or success message
     return { success: true, user };
   } catch (error) {
     // Handle errors such as invalid email, weak password, etc.
@@ -48,7 +46,7 @@ export const registerUser = async (userData) => {
     await addDoc(usersRef, {
       ...userData,
       location: new GeoPoint(
-        userData.location.latitude, // Ensure these are set
+        userData.location.latitude,
         userData.location.longitude
       ),
     });

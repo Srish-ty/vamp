@@ -1,23 +1,30 @@
 "use client";
 import React, { useContext } from "react";
+import { useRouter } from "next/navigation";
 import UserForm from "./userReg";
 import RegisterHospital from "./hospReg";
 import LabRegistrationForm from "./labReg";
-import { AuthContext, AuthProvider } from "../context/authContext";
+import { AuthContext } from "../context/authContext";
+import { Route } from "@mui/icons-material";
 
 const RegisterPage = () => {
-  // Access context directly
-  const { type } = useContext(AuthContext); // Get the type from AuthContext
+  const { user, type } = useContext(AuthContext);
+  console.log("User from context: ", user);
+  console.log("Type from context: ", type);
 
-  // Conditionally render the form based on the user type
   const renderForm = () => {
+    const router = useRouter();
+
+    if (!type) {
+      router.push("/login");
+    }
     return (
       <div>
-        {type == "user" ? (
+        {type == "User" ? (
           <UserForm />
-        ) : type == "hospital" ? (
+        ) : type == "Hospital" ? (
           <RegisterHospital />
-        ) : type == "lab" ? (
+        ) : type == "Lab" ? (
           <LabRegistrationForm />
         ) : (
           <p>Invalid type. Please log in with the correct user type.</p>

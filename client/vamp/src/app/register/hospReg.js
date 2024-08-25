@@ -1,16 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { addHospitalToFirestore } from "../firebase/register"; // Import Firestore function
 import { bloodgroups } from "../config/bloodGroups";
+import { AuthContext } from "../context/authContext";
 
 const RegisterHospital = () => {
+  const { user, type } = useContext(AuthContext);
+
   const [hospitalData, setHospitalData] = useState({
     name: "",
     email: "",
     phone: "",
     blood_inventory: {},
     location: null,
+    uid: user.uid,
+    type: type || "Hospital",
   });
 
   const [bloodInventoryFields, setBloodInventoryFields] = useState([

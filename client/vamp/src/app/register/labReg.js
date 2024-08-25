@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { bloodgroups } from "../config/bloodGroups";
 import { registerLab } from "../firebase/register";
@@ -8,6 +8,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { BackgroundBeams } from "../components/ui/background-beams";
+import { AuthContext } from "../context/authContext";
 
 const BottomGradient = () => {
   return (
@@ -27,6 +28,8 @@ const LabelInputContainer = ({ children, className }) => {
 };
 
 const LabRegistrationForm = () => {
+  const { user, type } = useContext(AuthContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -73,6 +76,8 @@ const LabRegistrationForm = () => {
         acc[item.bloodType] = item.quantity;
         return acc;
       }, {}),
+      uid: user.uid,
+      type: type || "Lab",
     };
 
     try {

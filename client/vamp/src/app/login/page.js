@@ -31,6 +31,8 @@ const RegisterForm = () => {
   const { type, setType } = useContext(AuthContext);
   const [stype, setStype] = useState(type || "");
 
+  console.log("the type is", type);
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
@@ -134,7 +136,6 @@ const RegisterForm = () => {
               <BottomGradient />
             </button>
           </form>
-          {/* Google Sign-In Button */}
           <div className="mt-4">
             <button
               onClick={handleGoogleSignIn}

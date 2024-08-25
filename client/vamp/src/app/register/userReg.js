@@ -5,7 +5,8 @@ import { bloodgroups } from "../config/bloodGroups";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
-import { BackgroundBeams } from "../components/ui/background-beams"; // Adjust the import path accordingly
+import { BackgroundBeams } from "../components/ui/background-beams";
+import { AuthContext } from "../context/authContext";
 
 const BottomGradient = () => {
   return (
@@ -25,14 +26,16 @@ const LabelInputContainer = ({ children, className }) => {
 };
 
 const UserForm = () => {
+  const { user, type } = useContext(AuthContext);
+
   const [userData, setUserData] = useState({
     bloodGroup: "",
     email: "",
     location: null,
     name: "",
     phone: "",
-    type: "user",
-    uid: "",
+    type: type || "User",
+    uid: user.uid,
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
