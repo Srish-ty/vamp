@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter
 import { loginUser, loginWithGoogle } from "../firebase/register"; // Import Google sign-in
 import Link from "next/link";
@@ -8,6 +8,7 @@ import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { BackgroundBeams } from "../components/ui/background-beams";
 import Types from "./types";
+import { AuthContext } from "../context/authContext";
 
 const BottomGradient = () => {
   return (
@@ -27,13 +28,19 @@ const LabelInputContainer = ({ children, className }) => {
 };
 
 const RegisterForm = () => {
-  const [stype, setStype] = useState("");
+  const { type, setType } = useContext(AuthContext);
+  const [stype, setStype] = useState(type || "");
 
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter(); // Initialize useRouter
+
+  // Sync stype with context type
+  useEffect(() => {
+    setType(stype);
+  }, [stype, setType]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
