@@ -5,7 +5,6 @@ import UserForm from "./userReg";
 import RegisterHospital from "./hospReg";
 import LabRegistrationForm from "./labReg";
 import { AuthContext } from "../context/authContext";
-import { Route } from "@mui/icons-material";
 
 const RegisterPage = () => {
   const { user, type } = useContext(AuthContext);

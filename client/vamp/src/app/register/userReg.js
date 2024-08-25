@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { registerUser } from "../firebase/register";
 import { bloodgroups } from "../config/bloodGroups";
 import { Label } from "../components/ui/label";
@@ -30,9 +30,9 @@ const UserForm = () => {
 
   const [userData, setUserData] = useState({
     bloodGroup: "",
-    email: "",
+    email: user.email || "",
     location: null,
-    name: "",
+    name: user.name || "",
     phone: "",
     type: type || "User",
     uid: user.uid,
