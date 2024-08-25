@@ -1,9 +1,17 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { IconClipboardCopy, IconDroplet } from "@tabler/icons-react";
 import { bloodgroups } from "../../config/bloodGroups";
 
 const FeedCard = ({ item }) => {
-  const progressWidth = Math.random() * 100;
+  const [progressWidth, setProgress] = useState(Math.random() * 100);
+  const [isDonated, setDonated] = useState(false);
+  const handleProgress = () => {
+    if (progressWidth >= 100) return;
+    setProgress(progressWidth + 10);
+    alert("Thank you for your Response!");
+    setDonated(true);
+  };
 
   return (
     <div className="border-2 border-teal-400 rounded-lg p-6 mb-6 bg-white shadow-lg transition-transform duration-300 transform hover:scale-105 flex flex-col relative ">
@@ -49,7 +57,8 @@ const FeedCard = ({ item }) => {
                 (grp) =>
                   item.demand[grp] && (
                     <p key={grp} className="text-gray-700">
-                      <span className="font-semibold">{grp}:</span> {item.demand[grp]}
+                      <span className="font-semibold">{grp}:</span>{" "}
+                      {item.demand[grp]}
                     </p>
                   )
               )}
@@ -71,8 +80,7 @@ const FeedCard = ({ item }) => {
       <div className="text-sm text-gray-500 mt-4 border-t pt-4">
         {item.type === "Post" ? (
           <span>
-            Posted on:{" "}
-            {new Date(item.date.seconds * 1000).toLocaleDateString()}
+            Posted on: {new Date(item.date.seconds * 1000).toLocaleDateString()}
           </span>
         ) : (
           <>
@@ -90,7 +98,14 @@ const FeedCard = ({ item }) => {
       </div>
 
       {item.type === "Requirement" && (
-        <button className="absolute bottom-4 right-4 bg-teal-500 text-white font-semibold px-4 py-2 rounded-lg shadow hover:bg-teal-600 transition duration-300">
+        <button
+          className={
+            "absolute bottom-4 right-4 bg-teal-500 text-white font-semibold px-4 py-2 rounded-lg shadow hover:bg-teal-600 transition duration-300" +
+            (isDonated ? " cursor-not-allowed bg-slate-500" : "")
+          }
+          onClick={handleProgress}
+          disabled={isDonated}
+        >
           Donate
         </button>
       )}
