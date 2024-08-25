@@ -1,11 +1,19 @@
 import React from "react";
 
 const ProfileHeader = ({ user }) => {
+  // Extract latitude and longitude from the location field
+  const locationString = user.location
+    ? `${user.location._lat}, ${user.location._long}`
+    : "Location not available"; // Fallback if location is missing
+
   return (
     <div className="flex gap-4 h-64">
       <div className="bg-gradient-to-br from-teal-400 to-teal-200 p-6 rounded-lg flex items-center relative w-3/5">
         <img
-          src={user.profilePic}
+          src={
+            user.profilePic ||
+            "https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png"
+          }
           alt="Profile"
           className="w-32 h-32 rounded-full border-4 border-white"
         />
@@ -26,14 +34,25 @@ const ProfileHeader = ({ user }) => {
           </svg>
         </button>
         <div className="ml-6 text-white">
-          <h2 className="text-3xl font-bold">{user.name}</h2>
+          <h2 className="text-3xl font-bold">
+            Name: <span className="text-teal-950"> {user.name}</span>
+          </h2>
           <p className="text-lg">Age: {user.age}</p>
-          <p className="text-lg">Location: {user.location}</p>
-          <p className="text-lg">Blood Group: {user.bloodGroup}</p>
+          <p className="text-lg">
+            Location:<span className="text-teal-950"> {locationString} </span>{" "}
+          </p>{" "}
+          {/* Render formatted location */}
+          <p className="text-lg">
+            Blood Group:{" "}
+            <span className="text-teal-950"> {user.bloodGroup}</span>{" "}
+          </p>
           <p className="text-lg">Donations: {user.donationCount}</p>
         </div>
       </div>
-      <div className="rounded bg-slate-200 w-2/5 flex justify-center items-center">map component</div>
+      <div className="rounded bg-slate-200 w-2/5 flex justify-center items-center">
+        {/* Map component can be added here */}
+        map component
+      </div>
     </div>
   );
 };

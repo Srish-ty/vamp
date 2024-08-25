@@ -4,7 +4,7 @@ import { IconClipboardCopy, IconDroplet } from "@tabler/icons-react";
 import { bloodgroups } from "../../config/bloodGroups";
 
 const FeedCard = ({ item }) => {
-  const [progressWidth, setProgress] = useState(Math.random() * 100);
+  const [progressWidth, setProgress] = useState(Math.random() * 72);
   const [isDonated, setDonated] = useState(false);
   const handleProgress = () => {
     if (progressWidth >= 100) return;

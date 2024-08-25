@@ -7,6 +7,7 @@ import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { BackgroundBeams } from "../components/ui/background-beams";
 import { AuthContext } from "../context/authContext";
+import { useRouter } from "next/navigation";
 
 const BottomGradient = () => {
   return (
@@ -26,7 +27,9 @@ const LabelInputContainer = ({ children, className }) => {
 };
 
 const UserForm = () => {
+  const router = useRouter();
   const { user, type } = useContext(AuthContext);
+  console.log("User from context: ", user);
 
   const [userData, setUserData] = useState({
     bloodGroup: "",
@@ -36,6 +39,11 @@ const UserForm = () => {
     phone: "",
     type: type || "User",
     uid: user.uid,
+    karma: 2,
+    activity: [
+      new Date("2024-08-15T00:00:00"),
+      new Date("2024-08-23T00:00:00"),
+    ],
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -69,6 +77,7 @@ const UserForm = () => {
     try {
       await registerUser(userData);
       alert("Registration successful!");
+      router.push("/feed");
     } catch (error) {
       console.error("Error during registration: ", error);
     } finally {

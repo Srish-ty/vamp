@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchPosts, fetchRequirements } from "../firebase/feed";
 import { bloodgroups } from "../config/bloodGroups";
 import FeedCard from "../components/feedcard"; // Import FeedCard component
+import UserMenu from "../components/userMenu";
 
 const Feed = () => {
   const [combinedData, setCombinedData] = useState([]);
@@ -30,17 +31,17 @@ const Feed = () => {
 
   return (
     <div className="bg-gradient-to-r from-white to-teal-200">
+      <UserMenu />
       <div className="relative max-w-4xl  mx-auto p-4">
-        <h1 className="text-3xl font-bold text-Black mb-8 ">Community Feed</h1>
+        <h1 className="text-4xl font-extrabold text-teal-600 mb-8 text-center">
+          Community Feed
+        </h1>
         {combinedData.map((item) => (
           <FeedCard key={item.id} item={item} />
         ))}
       </div>
 
       <div className="max-w-4xl mx-auto p-4">
-        <h1 className="text-4xl font-extrabold text-teal-600 mb-8 text-center">
-          Community Feed
-        </h1>
         {combinedData.map((item) => (
           <div
             key={item.id}
